@@ -38,6 +38,8 @@ For those users that need more advanced functionality, the template also support
 Contact me
 ------
 
+Please feel free to contact me via email for any questions or discussions.
+
 <!-- 
 More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/), the [growing wiki](https://github.com/academicpages/academicpages.github.io/wiki), and you can always [ask a question on GitHub](https://github.com/academicpages/academicpages.github.io/discussions). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
 -->
