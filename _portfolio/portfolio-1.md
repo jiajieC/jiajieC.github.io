@@ -1,6 +1,6 @@
 ---
-title: "Portfolio item number 1"
-excerpt: "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+title: "中国四川九寨沟箭竹海"
+excerpt: "“九寨归来不看水”<br/><img src='/images/Jiuzhaigou.png'>"
 collection: portfolio
 ---
 
