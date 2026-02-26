@@ -4,4 +4,4 @@ excerpt: "“九寨归来不看水”<br/><img src='/images/Jiuzhaigou.png'>"
 collection: portfolio
 ---
 
-This is an item in your portfolio. It can be have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML. 
+黄山归来不看山，九寨归来不看水。中国大好河山，锦绣画卷！
