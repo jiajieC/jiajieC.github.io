@@ -11,10 +11,7 @@ location: "Pittsburgh, PA, USA."
 Guide students to learn how to build circuit, debug and make measurements.
 
 How to use a multimeter?
-======
 
 How to debug a circuit with meters?
-======
 
 Circuit Analysis and Appplications.
-======
