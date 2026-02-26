@@ -7,7 +7,7 @@ excerpt: 'An applied magnetic field affects a superconductor in two ways -- by p
 date: 2026-02-23
 venue: 'Condensed Matter > Superconductivity > arXiv:2602.20265'
 paperurl: 'https://arxiv.org/pdf/2602.20265'
-citation: 'Cheng, Jiajie, et al. (2026). &quot;Qubit Noise Spectroscopy of Superconducting Dynamics in a Magnetic Field 3.&quot; <i>arXiv</i>. 1(3).'
+citation: 'Cheng, Jiajie, et al. (2026). &quot;Qubit Noise Spectroscopy of Superconducting Dynamics in a Magnetic Field.&quot; <i>arXiv</i>.'
 ---
 
 Using [MathJax](https://www.mathjax.org/) in the description is supported - $$E=mc^2$$ - however, the use must be mindful that the default delimiters are `$$...$$` and `\\[...\\]` which differs from the `$...$` that is typically expected.
