@@ -1,22 +1,12 @@
 ---
 layout: archive
-title: "Notes / Teaching"
+title: "Teaching"
 permalink: /teaching/
 author_profile: true
 ---
 
 {% include base_path %}
 
-## Notes
 {% for post in site.teaching reversed %}
-  {% if post.category == "notes" %}
-    {% include archive-single.html %}
-  {% endif %}
-{% endfor %}
-
-## Teaching
-{% for post in site.teaching reversed %}
-  {% if post.category == "teaching" %}
-    {% include archive-single.html %}
-  {% endif %}
+  {% include archive-single.html %}
 {% endfor %}
