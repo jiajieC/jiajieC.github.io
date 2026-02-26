@@ -1,11 +1,11 @@
 ---
-title: "Teaching Experience 2"
+title: "热力学与统计物理学"
 collection: notes
-type: "Workshop"
-permalink: /teaching/2015-spring-teaching-1
-venue: "University 1, Department"
-date: 2015-01-01
-location: ""
+type: "笔记"
+permalink: /notes/2023-ther-stat
+venue: "中国科学技术大学"
+date: 2023-07-01
+location: "安徽合肥"
 links:
   - url: /files/TherSta.pdf
     text: "Download PDF/下载PDF"
