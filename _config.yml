@@ -23,7 +23,7 @@ repository               : "academicpages/academicpages.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "Pillars of Creation (NIRCam Image) Webb Telescope Oct 19 2022.png"
+  avatar           : "Mandelbrot_Set.png"
   name             : "Jiajie Cheng" # Your Sidebar Name
   pronouns         : # example: "she/her"  
   bio              : "Observer of Beauty, Curious of Unknown." # Short biography for the left-hand sidebar
