@@ -335,6 +335,35 @@ def parse_teaching(teaching_dir):
     
     return teaching
 
+def parse_notes(notes_dir):
+    """Parse notes from the _notes directory."""
+    notes = []
+    
+    if not os.path.exists(notes_dir):
+        return notes
+    
+    for notes_file in sorted(glob.glob(os.path.join(notes_dir, "*.md"))):
+        with open(notes_file, 'r', encoding='utf-8') as file:
+            content = file.read()
+        
+        # Extract front matter
+        front_matter_match = re.match(r'^---\s*(.*?)\s*---', content, re.DOTALL)
+        if front_matter_match:
+            front_matter = yaml.safe_load(front_matter_match.group(1))
+            
+            # Extract notes details
+            notes_entry = {
+                "course": front_matter.get('title', ''),
+                "institution": front_matter.get('venue', ''),
+                "date": front_matter.get('date', ''),
+                "role": front_matter.get('type', ''),
+                "description": front_matter.get('excerpt', '')
+            }
+            
+            notes.append(notes_entry)
+    
+    return notes
+
 def parse_portfolio(portfolio_dir):
     """Parse portfolio items from the _portfolio directory."""
     portfolio = []
