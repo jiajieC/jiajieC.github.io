@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
+site_theme               : "mint" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
 title                    : "Jiajie / A Little Space"
 title_separator          : "-"
 name                     : &name "Jiajie Cheng"
@@ -23,12 +23,12 @@ repository               : "academicpages/academicpages.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
-  name             : "Your Sidebar Name"
+  avatar           : "Pillars of Creation (NIRCam Image) Webb Telescope Oct 19 2022.png"
+  name             : "Jiajie Cheng" # Your Sidebar Name
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
+  bio              : "Observer of Beauty, Curious of Unknown." # Short biography for the left-hand sidebar
   location         : "Earth"
-  employer         : ""
+  employer         : # "Empolyer"
   uri              : # URL
   email            : "jiajie@cmu.edu" 
 
