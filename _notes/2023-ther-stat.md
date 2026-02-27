@@ -9,6 +9,6 @@ location: "安徽合肥"
 links:
   - url: "/files/TherSta.pdf"
     label: "PDF 中文"
-  - url: "/files/TherSta_en.pdf"
+  - url: "/files/TherStat.pdf"
     label: "PDF English"
 ---
