@@ -336,7 +336,12 @@ def parse_teaching(teaching_dir):
     return teaching
 
 def parse_notes(notes_dir):
-    """Parse notes and format as: title(link) — PDF(link)\nPublished: date"""
+    """
+    Parse notes from the _notes directory and return a list of formatted strings:
+    
+    热力学与统计物理学笔记 (link) — 下载PDF (link)
+    Published: July 01, 2023
+    """
     notes = []
 
     if not os.path.exists(notes_dir):
@@ -351,38 +356,36 @@ def parse_notes(notes_dir):
         if front_matter_match:
             front_matter = yaml.safe_load(front_matter_match.group(1))
 
-            # Title link (if permalink exists, link to it; otherwise just text)
-            permalink = front_matter.get('permalink', '#')
-            title = front_matter.get('title', 'Untitled')
-            title_link = f"[{title}]({permalink})"
+            # Use custom_title or title as the visible title text
+            title_text = front_matter.get('custom_title', front_matter.get('title', 'Untitled'))
 
             # PDF link
-            pdf_url = ""
-            pdf_label = "下载PDF"
-            if 'paper' in front_matter:
-                pdf_url = front_matter['paper'].get('url', '#')
-                pdf_label = front_matter['paper'].get('label', '下载PDF')
-            elif 'papers' in front_matter and front_matter['papers']:
-                pdf_url = front_matter['papers'][0].get('url', '#')
-                pdf_label = front_matter['papers'][0].get('label', '下载PDF')
+            pdf_links = []
+            if 'papers' in front_matter and front_matter['papers']:
+                for p in front_matter['papers']:
+                    pdf_links.append(f"[{p.get('label', 'PDF')}]({p.get('url','')})")
+            elif 'paper' in front_matter:
+                p = front_matter['paper']
+                pdf_links.append(f"[{p.get('label', 'PDF')}]({p.get('url','')})")
 
-            pdf_link = f"[{pdf_label}]({pdf_url})" if pdf_url else ""
+            pdf_str = " — ".join(pdf_links) if pdf_links else ""
 
-            # Combine first line: title(link) — pdf(link)
-            first_line = f"{title_link} — {pdf_link}".strip()
+            # Combine title and PDF on the same line
+            first_line = f"{title_text} {pdf_str}".strip()
 
-            # Second line: published date
+            # Second line: Published date
             date = front_matter.get('date', '')
             second_line = f"Published: {date}" if date else ""
 
-            # Store formatted note
+            # Store formatted entry
             notes_entry = {
                 "formatted": f"{first_line}\n{second_line}".strip(),
-                "title": title,
-                "permalink": permalink,
-                "pdf_url": pdf_url,
-                "pdf_label": pdf_label,
-                "date": date
+                "title": title_text,
+                "pdf_links": pdf_links,
+                "date": date,
+                "location": front_matter.get('location', ''),
+                "venue": front_matter.get('venue', ''),
+                "type": front_matter.get('type', '')
             }
 
             notes.append(notes_entry)
