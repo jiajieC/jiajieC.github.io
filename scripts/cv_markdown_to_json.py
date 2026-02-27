@@ -342,33 +342,24 @@ def parse_notes(notes_dir):
     if not os.path.exists(notes_dir):
         return notes
     
-    # Iterate through all markdown files in the directory
-    for note_file in sorted(glob.glob(os.path.join(notes_dir, "*.md"))):
-        with open(note_file, 'r', encoding='utf-8') as file:
+    for notes_file in sorted(glob.glob(os.path.join(notes_dir, "*.md"))):
+        with open(notes_file, 'r', encoding='utf-8') as file:
             content = file.read()
         
-        # Extract YAML front matter between the --- markers
+        # Extract front matter
         front_matter_match = re.match(r'^---\s*(.*?)\s*---', content, re.DOTALL)
         if front_matter_match:
             front_matter = yaml.safe_load(front_matter_match.group(1))
             
             # Extract note details
             note_entry = {
-                "title": front_matter.get('title', ''),         # e.g., "Thermal notes"
-                "permalink": front_matter.get('permalink', ''), # For the [link to detail]
-                "pdf_url": front_matter.get('pdf_url', ''),     # For the [download pdf link]
-                "date": front_matter.get('date', '')            # For "Published: date"
+                "title": front_matter.get('title', ''),
+                "detail_link": front_matter.get('detail_link', ''),
+                "pdf_link": front_matter.get('pdf_link', ''),
+                "date": front_matter.get('date', '')
             }
             
-            # Fallback: If no permalink is in the front matter, create one from the filename
-            if not note_entry["permalink"]:
-                base_name = os.path.basename(note_file).replace('.md', '')
-                note_entry["permalink"] = f"/notes/{base_name}/"
-                
             notes.append(note_entry)
-            
-    # Optional: Sort notes by date, newest first
-    notes.sort(key=lambda x: x.get('date', ''), reverse=True)
     
     return notes
     
