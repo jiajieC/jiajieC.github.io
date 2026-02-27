@@ -1,5 +1,5 @@
 ---
-title: "热力学与统计物理笔记（PDF）"
+title: "热力学与统计物理笔记"
 collection: notes
 type: "notes"
 paper:
