@@ -1,5 +1,5 @@
 ---
-title: "热力学与统计物理（PDF笔记）"
+title: "热力学与统计物理笔记（PDF）"
 collection: notes
 type: "notes"
 permalink: /files/TherSta.pdf
