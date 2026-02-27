@@ -1,9 +1,8 @@
 ---
-title: "Thermodynamics and Statistical Physics Notes (PDF)"
-collection: notes
-type: "notes"
-permalink: /files/TherStat.pdf
-venue: "USTC"
+title: "Thermal Notes En"
 date: 2023-07-01
-location: "Anhui"
+permalink: /notes/thermal-statistical-en/
+pdf_link: /files/TherStat.pdf
 ---
+
+This notes is based on.
