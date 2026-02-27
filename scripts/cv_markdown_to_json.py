@@ -336,7 +336,7 @@ def parse_teaching(teaching_dir):
     return teaching
 
 def parse_notes(notes_dir):
-    """Parse notes from the _notes directory and create custom formatted lines with PDFs and date/location."""
+    """Parse notes and format as: title(link) — PDF(link)\nPublished: date"""
     notes = []
 
     if not os.path.exists(notes_dir):
@@ -346,49 +346,49 @@ def parse_notes(notes_dir):
         with open(notes_file, 'r', encoding='utf-8') as file:
             content = file.read()
 
-        # Extract front matter
+        # Extract YAML front matter
         front_matter_match = re.match(r'^---\s*(.*?)\s*---', content, re.DOTALL)
         if front_matter_match:
             front_matter = yaml.safe_load(front_matter_match.group(1))
 
-            # Extract PDFs (support single 'paper' or multiple 'papers')
-            pdf_links = []
-            if 'papers' in front_matter and front_matter['papers']:
-                for p in front_matter['papers']:
-                    pdf_links.append(f"[{p.get('label', 'PDF')}]({p.get('url','')})")
-            elif 'paper' in front_matter:
-                p = front_matter['paper']
-                pdf_links.append(f"[{p.get('label', 'PDF')}]({p.get('url','')})")
+            # Title link (if permalink exists, link to it; otherwise just text)
+            permalink = front_matter.get('permalink', '#')
+            title = front_matter.get('title', 'Untitled')
+            title_link = f"[{title}]({permalink})"
 
-            # Create the first line: custom title + PDFs
-            custom_title_line = front_matter.get('custom_title', front_matter.get('title', 'Untitled'))
-            if pdf_links:
-                custom_title_line += " — " + " — ".join(pdf_links)
+            # PDF link
+            pdf_url = ""
+            pdf_label = "下载PDF"
+            if 'paper' in front_matter:
+                pdf_url = front_matter['paper'].get('url', '#')
+                pdf_label = front_matter['paper'].get('label', '下载PDF')
+            elif 'papers' in front_matter and front_matter['papers']:
+                pdf_url = front_matter['papers'][0].get('url', '#')
+                pdf_label = front_matter['papers'][0].get('label', '下载PDF')
 
-            # Create the second line: date and location
+            pdf_link = f"[{pdf_label}]({pdf_url})" if pdf_url else ""
+
+            # Combine first line: title(link) — pdf(link)
+            first_line = f"{title_link} — {pdf_link}".strip()
+
+            # Second line: published date
             date = front_matter.get('date', '')
-            location = front_matter.get('location', '')
-            date_location_line = ""
-            if date or location:
-                date_location_line = f"*{date} · {location}*"
+            second_line = f"Published: {date}" if date else ""
 
-            # Combine into formatted string
-            formatted_entry = f"{custom_title_line}\n{date_location_line}".strip()
-
-            # Store in notes list
+            # Store formatted note
             notes_entry = {
-                "formatted": formatted_entry,
-                "pdf_links": pdf_links,
-                "date": date,
-                "location": location,
-                "venue": front_matter.get('venue', ''),
-                "type": front_matter.get('type', '')
+                "formatted": f"{first_line}\n{second_line}".strip(),
+                "title": title,
+                "permalink": permalink,
+                "pdf_url": pdf_url,
+                "pdf_label": pdf_label,
+                "date": date
             }
 
             notes.append(notes_entry)
-    
-    return notes
 
+    return notes
+    
 def parse_portfolio(portfolio_dir):
     """Parse portfolio items from the _portfolio directory."""
     portfolio = []
