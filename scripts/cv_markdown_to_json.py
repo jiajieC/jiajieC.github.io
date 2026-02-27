@@ -336,53 +336,55 @@ def parse_teaching(teaching_dir):
     return teaching
 
 def parse_notes(notes_dir):
-    """Parse notes from the _notes directory and format them with title, PDFs, date, and location."""
+    """Parse notes from the _notes directory and create custom formatted lines with PDFs and date/location."""
     notes = []
-    
+
     if not os.path.exists(notes_dir):
         return notes
-    
+
     for notes_file in sorted(glob.glob(os.path.join(notes_dir, "*.md"))):
         with open(notes_file, 'r', encoding='utf-8') as file:
             content = file.read()
-        
+
         # Extract front matter
         front_matter_match = re.match(r'^---\s*(.*?)\s*---', content, re.DOTALL)
         if front_matter_match:
             front_matter = yaml.safe_load(front_matter_match.group(1))
-            
-            # Extract PDFs: support both 'paper' and 'papers'
+
+            # Extract PDFs (support single 'paper' or multiple 'papers')
             pdf_links = []
-            if 'papers' in front_matter:
+            if 'papers' in front_matter and front_matter['papers']:
                 for p in front_matter['papers']:
                     pdf_links.append(f"[{p.get('label', 'PDF')}]({p.get('url','')})")
             elif 'paper' in front_matter:
                 p = front_matter['paper']
                 pdf_links.append(f"[{p.get('label', 'PDF')}]({p.get('url','')})")
-            
-            # Combine title and PDF links on one line
-            title_line = front_matter.get('title', 'Untitled')
+
+            # Create the first line: custom title + PDFs
+            custom_title_line = front_matter.get('custom_title', front_matter.get('title', 'Untitled'))
             if pdf_links:
-                title_line += " — " + " — ".join(pdf_links)
-            
-            # Combine date and location on the next line
+                custom_title_line += " — " + " — ".join(pdf_links)
+
+            # Create the second line: date and location
             date = front_matter.get('date', '')
             location = front_matter.get('location', '')
             date_location_line = ""
             if date or location:
                 date_location_line = f"*{date} · {location}*"
-            
-            # Store formatted entry
+
+            # Combine into formatted string
+            formatted_entry = f"{custom_title_line}\n{date_location_line}".strip()
+
+            # Store in notes list
             notes_entry = {
-                "formatted": f"{title_line}\n{date_location_line}".strip(),
-                "title": front_matter.get('title', ''),
-                "papers": pdf_links,
+                "formatted": formatted_entry,
+                "pdf_links": pdf_links,
                 "date": date,
                 "location": location,
                 "venue": front_matter.get('venue', ''),
                 "type": front_matter.get('type', '')
             }
-            
+
             notes.append(notes_entry)
     
     return notes
