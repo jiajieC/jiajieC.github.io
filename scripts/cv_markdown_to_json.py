@@ -336,7 +336,7 @@ def parse_teaching(teaching_dir):
     return teaching
 
 def parse_notes(notes_dir):
-    """Parse notes from the _notes directory."""
+    """Parse notes from the _notes directory and format them with title, PDFs, date, and location."""
     notes = []
     
     if not os.path.exists(notes_dir):
@@ -351,13 +351,36 @@ def parse_notes(notes_dir):
         if front_matter_match:
             front_matter = yaml.safe_load(front_matter_match.group(1))
             
-            # Extract notes details
+            # Extract PDFs: support both 'paper' and 'papers'
+            pdf_links = []
+            if 'papers' in front_matter:
+                for p in front_matter['papers']:
+                    pdf_links.append(f"[{p.get('label', 'PDF')}]({p.get('url','')})")
+            elif 'paper' in front_matter:
+                p = front_matter['paper']
+                pdf_links.append(f"[{p.get('label', 'PDF')}]({p.get('url','')})")
+            
+            # Combine title and PDF links on one line
+            title_line = front_matter.get('title', 'Untitled')
+            if pdf_links:
+                title_line += " — " + " — ".join(pdf_links)
+            
+            # Combine date and location on the next line
+            date = front_matter.get('date', '')
+            location = front_matter.get('location', '')
+            date_location_line = ""
+            if date or location:
+                date_location_line = f"*{date} · {location}*"
+            
+            # Store formatted entry
             notes_entry = {
-                "course": front_matter.get('title', ''),
-                "institution": front_matter.get('venue', ''),
-                "date": front_matter.get('date', ''),
-                "role": front_matter.get('type', ''),
-                "description": front_matter.get('excerpt', '')
+                "formatted": f"{title_line}\n{date_location_line}".strip(),
+                "title": front_matter.get('title', ''),
+                "papers": pdf_links,
+                "date": date,
+                "location": location,
+                "venue": front_matter.get('venue', ''),
+                "type": front_matter.get('type', '')
             }
             
             notes.append(notes_entry)
