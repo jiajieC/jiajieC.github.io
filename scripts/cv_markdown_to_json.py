@@ -336,60 +336,40 @@ def parse_teaching(teaching_dir):
     return teaching
 
 def parse_notes(notes_dir):
-    """
-    Parse notes from the _notes directory and return a list of formatted strings:
-    
-    热力学与统计物理学笔记 (link) — 下载PDF (link)
-    Published: July 01, 2023
-    """
+    """Parse notes from the _notes directory."""
     notes = []
-
+    
     if not os.path.exists(notes_dir):
         return notes
-
-    for notes_file in sorted(glob.glob(os.path.join(notes_dir, "*.md"))):
-        with open(notes_file, 'r', encoding='utf-8') as file:
+    
+    # Iterate through all markdown files in the directory
+    for note_file in sorted(glob.glob(os.path.join(notes_dir, "*.md"))):
+        with open(note_file, 'r', encoding='utf-8') as file:
             content = file.read()
-
-        # Extract YAML front matter
+        
+        # Extract YAML front matter between the --- markers
         front_matter_match = re.match(r'^---\s*(.*?)\s*---', content, re.DOTALL)
         if front_matter_match:
             front_matter = yaml.safe_load(front_matter_match.group(1))
-
-            # Use custom_title or title as the visible title text
-            title_text = front_matter.get('custom_title', front_matter.get('title', 'Untitled'))
-
-            # PDF link
-            pdf_links = []
-            if 'papers' in front_matter and front_matter['papers']:
-                for p in front_matter['papers']:
-                    pdf_links.append(f"[{p.get('label', 'PDF')}]({p.get('url','')})")
-            elif 'paper' in front_matter:
-                p = front_matter['paper']
-                pdf_links.append(f"[{p.get('label', 'PDF')}]({p.get('url','')})")
-
-            pdf_str = " — ".join(pdf_links) if pdf_links else ""
-
-            # Combine title and PDF on the same line
-            first_line = f"{title_text} {pdf_str}".strip()
-
-            # Second line: Published date
-            date = front_matter.get('date', '')
-            second_line = f"Published: {date}" if date else ""
-
-            # Store formatted entry
-            notes_entry = {
-                "formatted": f"{first_line}\n{second_line}".strip(),
-                "title": title_text,
-                "pdf_links": pdf_links,
-                "date": date,
-                "location": front_matter.get('location', ''),
-                "venue": front_matter.get('venue', ''),
-                "type": front_matter.get('type', '')
+            
+            # Extract note details
+            note_entry = {
+                "title": front_matter.get('title', ''),         # e.g., "Thermal notes"
+                "permalink": front_matter.get('permalink', ''), # For the [link to detail]
+                "pdf_url": front_matter.get('pdf_url', ''),     # For the [download pdf link]
+                "date": front_matter.get('date', '')            # For "Published: date"
             }
-
-            notes.append(notes_entry)
-
+            
+            # Fallback: If no permalink is in the front matter, create one from the filename
+            if not note_entry["permalink"]:
+                base_name = os.path.basename(note_file).replace('.md', '')
+                note_entry["permalink"] = f"/notes/{base_name}/"
+                
+            notes.append(note_entry)
+            
+    # Optional: Sort notes by date, newest first
+    notes.sort(key=lambda x: x.get('date', ''), reverse=True)
+    
     return notes
     
 def parse_portfolio(portfolio_dir):
