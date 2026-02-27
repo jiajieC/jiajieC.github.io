@@ -40,7 +40,7 @@
 
         {% if post.collection == 'teaching' %}
           <p> {{ post.type }}, <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
-        {% elsif post.collection == 'notes' %}{% if post.pdf_url %} <p> <a href="{{ base_path }}{{ post.pdf_url }}" target="_blank"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Download PDF </a> </p> {% endif %}
+        {% elsif post.collection == 'notes' %}{% if post.pdf_link %} <p> <a href="{{ base_path }}{{ post.pdf_link }}">[Download PDF]</a> </p> {% endif %}
         {% elsif post.collection == 'publications' %}
           <p>Published in <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif post.date %}
