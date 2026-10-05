@@ -1,6 +1,7 @@
 ---
 title: '2026 Nobel Prize in Physics Prediction'
 date: 2026-10-05
+author: Jiajie
 permalink: /posts/2026-10-05-pred-nobel
 tags:
   - cool posts
@@ -46,3 +47,5 @@ On this reading, apart from a few exceptional cases that follow the second patte
 The Nobel Prize in Physics thus appears to lag many major experimental and theoretical advances by roughly 30 to 40 years. One possible reason is the sheer number of achievements deserving recognition: candidates effectively have to wait their turn, and those who die before receiving the prize are left with a tragic missed opportunity. Another is that experimental verification of modern physical theories can take a very long time, reflecting a growing gap between theoretical development and experimental confirmation.
 
 From this historical perspective, this year's laureates would be expected to have made outstanding contributions between 1980 and 1990, with work that continues to have a broad, positive impact today. Taking their age and scientific influence into account, I therefore predict that Michael Berry and Yakir Aharonov have a very strong chance of winning this year's Nobel Prize in Physics.
+
+(translated from my answer in Zhihu: https://www.zhihu.com/question/2081708619905745132/answer/2090593239237771469)
