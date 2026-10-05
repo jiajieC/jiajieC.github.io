@@ -26,7 +26,7 @@ These two patterns provide a useful lens through which to review the Nobel Prize
 
 2019: Cosmology and exoplanets. James Peebles's work from the 1960s through the 1980s laid foundations for the Lambda-CDM (ΛCDM) cosmological model. In 1995, Michel Mayor and Didier Queloz discovered the first confirmed exoplanet orbiting a Sun-like star.
 
-2020: Black holes. In 1965, Roger Penrose showed that black-hole formation is a robust consequence of general relativity. Independent observations by Reinhard Genzel and Andrea Ghez, including landmark results published between 1996 and 1998, provided compelling evidence for a supermassive black hole at the center of the Milky Way.
+2020: Black holes. In 1965, Roger Penrose showed that black-hole formation is a robust consequence of general relativity. Independent observations by Reinhard Genzel and Andrea Ghez, including landmark results published between 1996 and 1998, provided smoking gun evidence for a supermassive black hole at the center of the Milky Way.
 
 2021: Climate and complex systems. Syukuro Manabe developed physical models of the climate, including pioneering studies in 1967 and 1975 of the effects of doubling atmospheric CO₂. Klaus Hasselmann proposed a stochastic climate model in 1976 that linked short-term weather fluctuations to long-term climate behavior. Through his work on spin glasses, Giorgio Parisi established a new framework for studying complex systems, introducing replica symmetry breaking (RSB) in 1979.
 
