@@ -4,9 +4,9 @@ date: 2026-10-05
 author: Jiajie
 permalink: /posts/2026-10-05-pred-nobel
 tags:
-  - cool posts
-  - category1
-  - category2
+  - physics
+  - nobel prize
+  - condensed matter
 ---
 
 Why Is a Nobel Prize for Berry a Historical Inevitability?
